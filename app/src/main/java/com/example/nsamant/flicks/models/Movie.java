@@ -18,6 +18,15 @@ public class Movie {
     private String backdropPath;
     private String releaseDate;
     private int votes;
+    private int movieId;
+
+    public int getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
+    }
 
     public String getReleaseDate() {
         return releaseDate;
@@ -74,6 +83,8 @@ public class Movie {
         this.votes = jsonObject.getInt("vote_average");
         this.backdropPath = jsonObject.getString("backdrop_path");
         this.releaseDate = jsonObject.getString("release_date");
+        this.movieId = jsonObject.getInt("id");
+        //this.movieKey = jsonObject.getString("key");
     }
 
     public static ArrayList<Movie> fromJsonArray(JSONArray array) {

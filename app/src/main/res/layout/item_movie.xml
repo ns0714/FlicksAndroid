@@ -19,14 +19,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:text="Name"
-        android:textSize="25sp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textSize="22sp"
+        android:textColor="@android:color/white"
         android:id="@+id/tvMovieTitle"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
+        android:ellipsize="none"
+        android:maxLines="4"
+        android:scrollHorizontally="false"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_toRightOf="@+id/ivMovieImage"
         android:layout_toEndOf="@+id/ivMovieImage" />
 
@@ -35,9 +38,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvMovieOverview"
-        android:textSize="15sp"
-        android:layout_marginTop="15dp"
+        android:textColor="@android:color/darker_gray"
+        android:ellipsize="end"
+        android:maxLines="7"
+        android:scrollHorizontally="false"
+        android:textSize="13sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_below="@+id/tvMovieTitle"
         android:layout_alignLeft="@+id/tvMovieTitle"
         android:layout_alignStart="@+id/tvMovieTitle" />
+
+
+
 </RelativeLayout>

@@ -4,7 +4,8 @@
     android:id="@+id/activity_flicks"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nsamant.activity.com.example.nsamant.flicks.FlicksActivity">
+    android:background="@color/transparentBlack"
+    tools:context="com.example.nsamant.flicks.activities.FlicksActivity">
 
 
     <ListView

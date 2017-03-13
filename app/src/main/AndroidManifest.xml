@@ -17,7 +17,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.nsamant.flicks.activities.DetailsActivity"></activity>
+        <activity android:name="com.example.nsamant.flicks.activities.DetailsActivity" />
+        <activity android:name="com.example.nsamant.flicks.activities.QuickPlayerActivity"
+                  android:screenOrientation="landscape">
+        </activity>
     </application>
 
 </manifest>

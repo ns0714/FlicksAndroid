@@ -2,8 +2,6 @@ package com.example.nsamant.flicks.activities;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
 import com.example.nsamant.activity.R;
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -19,11 +17,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-public class DetailsActivity extends YouTubeBaseActivity {
-
-    private TextView tvMovieTitle;
-    private TextView tvMovieReleaseDate;
-    private TextView tvMovieOverview;
+public class QuickPlayerActivity extends YouTubeBaseActivity {
 
     private static final String YOUTUBE_API_KEY = "AIzaSyCPwm2m3lKJKwjIDxzivxBcVZZujTXDXgU";
     private String url = "https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
@@ -32,24 +26,10 @@ public class DetailsActivity extends YouTubeBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
-
-        tvMovieTitle = (TextView) findViewById(R.id.tvMovieTitle);
-        tvMovieOverview = (TextView) findViewById(R.id.tvMovieOverview);
-        tvMovieReleaseDate = (TextView) findViewById(R.id.tvReleaseDate);
-
-        tvMovieTitle.setText(getIntent().getStringExtra("movie_title").toString());
-        tvMovieOverview.setText(getIntent().getStringExtra("movie_overview").toString());
-        tvMovieReleaseDate.setText(getIntent().getStringExtra("release_date").toString());
-
+        setContentView(R.layout.activity_quick_player);
         youTubePlayerView = (YouTubePlayerView) findViewById(R.id.player);
         int movieId = getIntent().getIntExtra("movie_id", 0);
         sendMovieDetailsNetworkRequest(movieId);
-    }
-
-    public void onSubmit(View v) {
-        // closes the activity and returns to first screen
-        this.finish();
     }
 
     private void sendMovieDetailsNetworkRequest(int movieId) {
@@ -57,21 +37,21 @@ public class DetailsActivity extends YouTubeBaseActivity {
         RequestParams params = new RequestParams();
         url = String.format(url, movieId);
         Log.d("url", url);
-        client.get(url, params, new JsonHttpResponseHandler() {
+        client.get(url, params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray movieDetails = null;
                 try {
                     final String key = response.getJSONArray("results").getJSONObject(0).getString("key");
+                    //movieDetailsList.addAll(MovieDetail.fromJsonArray(movieDetails));
                     Log.d("DEBUG", key);
 
-                    youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
+                    youTubePlayerView.initialize(YOUTUBE_API_KEY,new YouTubePlayer.OnInitializedListener() {
                         @Override
                         public void onInitializationSuccess(YouTubePlayer.Provider provider,
                                                             YouTubePlayer youTubePlayer, boolean b) {
-                           youTubePlayer.cueVideo(key);
+                            youTubePlayer.loadVideo(key);
                         }
-
                         @Override
                         public void onInitializationFailure(YouTubePlayer.Provider provider,
                                                             YouTubeInitializationResult youTubeInitializationResult) {
@@ -79,7 +59,7 @@ public class DetailsActivity extends YouTubeBaseActivity {
                         }
                     });
 
-                } catch (Exception ex) {
+                } catch(Exception ex) {
                     ex.printStackTrace();
                 }
                 super.onSuccess(statusCode, headers, response);

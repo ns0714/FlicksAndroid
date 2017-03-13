@@ -20,12 +20,14 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
+import static android.view.View.Z;
+
 public class FlicksActivity extends AppCompatActivity {
 
     private ListView lvMovies;
     private ArrayList<Movie> moviesList;
     private ArrayAdapter<Movie> movieArrayAdapter;
-    private String url;
+    private static final String URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +42,9 @@ public class FlicksActivity extends AppCompatActivity {
     }
 
     public void sendNetworkRequest() {
-        url = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
-        //params.put("key", "1232");
-        client.get(url, params, new JsonHttpResponseHandler(){
+        client.get(URL, params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray movieResults = null;
