@@ -126,6 +126,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
                     intent.putExtra("release_date", movie.getReleaseDate());
                     intent.putExtra("movie_overview", movie.getOverview());
                     intent.putExtra("movie_id", movie.getMovieId());
+                    intent.putExtra("movie_vote", movie.getVotes());
                     getContext().startActivity(intent);
                 }
             });
